@@ -1,9 +1,18 @@
-const express = require('express');
+import express, { Router } from 'express'; // importo como en ES6
+
+const router = Router(); // Agrego el router de express
 
 var app = express(); // inicializo express
 
-app.use('/', function(req, res){
-    res.send('Hola'); // primera respuesta Hola, al entrar al root endpoint
+app.use(router); // Uso es router de express
+
+// Configuro el router para que solamente responda a las peticiones GET
+router.get('/', function(req, res){ // Solo GET
+    res.send('Hola desde GET')
+});
+
+router.post('/', function(req, res){ // Solo POST
+    res.send('Hola desde POST')
 });
 
 app.listen(3000); // Escucho en el puerto 3000
