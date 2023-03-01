@@ -14,8 +14,8 @@
   "author": "Augusto Buchino",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.20.2",
     "express": "^4.18.2"
   },
   "type": "module"
-  
 }
