@@ -11,6 +11,10 @@ app.use(router); // Uso es router de express
 
 // Configuro el router para que solamente responda a las peticiones GET
 router.get('/message', function(req, res){ // Solo GET
+    console.log('Header' + req.headers); // Leemos el header
+    res.header({
+        "custome-header":"Nuestro valor personalizado", // enviamos nuestro header custome
+    })
     console.log(req.body); // imprimo el json o el form-encoded
     console.log(req.query); // nos permite acceder a los parametros por query
     res.send('Hola desde GET')
