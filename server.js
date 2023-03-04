@@ -45,7 +45,7 @@ router.post('/message', function(req, res){ // Solo POST
     }
 });
 
-
+app.use('/app', express.static('public'));
 
 app.listen(3000); // Escucho en el puerto 3000
 
