@@ -1,6 +1,6 @@
 import express, { Router } from 'express'; // importo como en ES6
 
-import response from './network/response.mjs';// importo el modulo de respestas homogeneas
+import {success,error} from './network/response.mjs';// importo el modulo de respestas homogeneas
 
 const router = Router(); // Agrego el router de express
 
@@ -21,7 +21,7 @@ router.get('/message', function(req, res){ // Solo GET
     console.log(req.query); // nos permite acceder a los parametros por query
     // res.send('Hola desde GET')
     // llamo a la funcion para manejar las respuestas desde el modulo success con un mensaje y un numero de estado
-    response.success(req, res, 'Creado correctamente',202);
+    success(req, res, 'Creado correctamente',202);
 });
 
 router.put('/message', function(req, res){ // Solo PUT
@@ -38,10 +38,10 @@ router.post('/message', function(req, res){ // Solo POST
     // res.status(201).send({'Error' : 'Creado con exito'}); // Envia el estado 201 en la respuesta 
     if(req.query.error == 'ok'){
         // llamo a la funcion para manejar las respuestas desde el modulo success con un mensaje de error y un numero de estado
-        response.error(req, res, 'error simulado', 401);
+        error(req, res, 'error simulado', 401, "Es solo una simulacion de errores");
     }else{
         // llamo a la funcion para manejar las respuestas desde el modulo success con un mensaje y un numero de estado
-        response.success(req, res,'Creado con exito',201); // Envia el estado 201 en la respuesta 
+        success(req, res,'Creado con exito',201); // Envia el estado 201 en la respuesta 
     }
 });
 
