@@ -2,6 +2,8 @@ import express, {Router} from 'express';
 
 import {success,error} from '../../network/response.mjs';// importo el modulo para las respestas homogeneas
 
+import controller from './controller.js';
+
 const router = Router(); // Agrego el router de express
 
 // Configuro el router para que solamente responda a las peticiones GET
@@ -25,17 +27,25 @@ router.put('/', function(req, res){ // Solo PUT
 });
 
 router.post('/', function(req, res){ // Solo POST
-    console.log(req.body);
-    console.log(req.query); // nos permite acceder a los parametros por query
+    // console.log(req.body);
+    // console.log(req.query); // nos permite acceder a los parametros por query
     // Lo que nos llegue del parametro 'text' que nos manda el body lo debuelve como respuesta
+
+    controller.addMessage(req.body.user, req.body.message)
+        .then((fullMessage) => {
+            success(req, res, fullMessage,201);
+        })
+        .catch((err) => {
+            error(req, res, 'Información invalida', 400, 'No se pudo cargar el message');
+        });
     // res.status(201).send({'Error' : 'Creado con exito'}); // Envia el estado 201 en la respuesta 
-    if(req.query.error == 'ok'){
-        // llamo a la funcion para manejar las respuestas desde el modulo success con un mensaje de error y un numero de estado
-        error(req, res, 'error simulado', 401, "Es solo una simulacion de errores");
-    }else{
-        // llamo a la funcion para manejar las respuestas desde el modulo success con un mensaje y un numero de estado
-        success(req, res,'Creado con exito',201); // Envia el estado 201 en la respuesta 
-    }
+    // if(req.query.error == 'ok'){
+    //     // llamo a la funcion para manejar las respuestas desde el modulo success con un mensaje de error y un numero de estado
+    //     error(req, res, 'error simulado', 401, "Es solo una simulacion de errores");
+    // }else{
+    //     // llamo a la funcion para manejar las respuestas desde el modulo success con un mensaje y un numero de estado
+    //     success(req, res,'Creado con exito',201); // Envia el estado 201 en la respuesta 
+    // }
 });
 
 export default router;
