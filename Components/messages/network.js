@@ -1,4 +1,4 @@
-import express, {Router} from 'express';
+import express, {response, Router} from 'express';
 
 import {success,error} from '../../network/response.mjs';// importo el modulo para las respestas homogeneas
 
@@ -8,15 +8,24 @@ const router = Router(); // Agrego el router de express
 
 // Configuro el router para que solamente responda a las peticiones GET
 router.get('/', function(req, res){ // Solo GET
-    console.log('Header' + req.headers); // Leemos el header
-    res.header({
-        "custome-header":"Nuestro valor personalizado", // enviamos nuestro header custome
-    })
-    console.log(req.body); // imprimo el json o el form-encoded
-    console.log(req.query); // nos permite acceder a los parametros por query
+    // console.log('Header' + req.headers); // Leemos el header
+    // res.header({
+    //     "custome-header":"Nuestro valor personalizado", // enviamos nuestro header custome
+    // })
+    // console.log(req.body); // imprimo el json o el form-encoded
+    // console.log(req.query); // nos permite acceder a los parametros por query
     // res.send('Hola desde GET')
     // llamo a la funcion para manejar las respuestas desde el modulo success con un mensaje y un numero de estado
-    success(req, res, 'Creado correctamente',202);
+    // success(req, res, 'Creado correctamente',202);
+
+    // Con el getMessage llamo al controlador para que me traiga todos los mensajes de la base de datos
+    controller.getMessage()
+        .then((messageList) => {
+            success(req, res, messageList, 200);
+        })
+        .catch((error) => {
+            error(req, res, 'Error inesperado', 500, error);
+        });
 });
 
 router.put('/', function(req, res){ // Solo PUT
@@ -31,9 +40,11 @@ router.post('/', function(req, res){ // Solo POST
     // console.log(req.query); // nos permite acceder a los parametros por query
     // Lo que nos llegue del parametro 'text' que nos manda el body lo debuelve como respuesta
 
+    // llamamos al controlador pora que se encargue de procesar la informacion del cuerpo del mensaje
+    // y pueda guardar el mensaje en la base de datos
     controller.addMessage(req.body.user, req.body.message)
         .then((fullMessage) => {
-            success(req, res, fullMessage,201);
+            success(req, res, fullMessage,201); // si lo resuelve, reenvía el mensaje y un codigo de respuesta valido
         })
         .catch((err) => {
             error(req, res, 'Información invalida', 400, 'No se pudo cargar el message');
