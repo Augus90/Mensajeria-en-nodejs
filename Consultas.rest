@@ -1,0 +1,21 @@
+POST  http://localhost:3000/message HTTP/1.1
+content-type: application/json
+
+{
+  "user": "Carlos",
+  "message": "Mundo"
+}
+
+###
+
+GET  http://localhost:3000/message HTTP/1.1
+content-type: application/json
+
+###
+
+PUT http://localhost:3000/message HTTP/1.1
+content-type: application/json
+
+{
+    "text": "Hola Mundo"
+}
