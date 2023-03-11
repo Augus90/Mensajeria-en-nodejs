@@ -30,10 +30,17 @@ const addMessage = function(message){
     myMessage.save();
 }
 
-const getMessage = async function(){
-    // return list;
-    // Llamo al find para que me traiga todos los mensajes de mi BDD
-    const messages = await Model.find();
+const getMessage = async function(filterUser){
+    // Variable filtro que es vacia si no se especifica el usuario para traer a todos
+    let filter = {};
+    // Si el usuario no es vacio, solo trae los mensajes del mismo creando el filtro
+    if(filterUser !== null){
+        filter = { user: filterUser };
+    }
+
+    // Llamo al find para que me traiga todos los mensajes de mi BDD con el filtro proporcionado
+    const messages = await Model.find(filter);
+
     return messages;
 }
 

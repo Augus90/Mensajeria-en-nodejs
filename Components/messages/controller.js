@@ -28,10 +28,10 @@ function addMessage(user, message) {
     
 };
 
-// Nos devuelve todos los mensajes de la base de datos 
-function getMessage(user, message) {
+// Nos devuelve todos los mensajes de la base de datos que coincidan con el filtro de ususario
+function getMessage(filterUser) {
     return new Promise((resolve, reject) => {
-        resolve(store.list());
+        resolve(store.list(filterUser));
     });
 };
 

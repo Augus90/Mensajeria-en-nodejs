@@ -18,8 +18,10 @@ router.get('/', function(req, res){ // Solo GET
     // llamo a la funcion para manejar las respuestas desde el modulo success con un mensaje y un numero de estado
     // success(req, res, 'Creado correctamente',202);
 
+    // Variable filtro que toma el query para buscar un solo user o todos si no ser proporciona ninguno
+    const filterMessage = req.query.user || null;
     // Con el getMessage llamo al controlador para que me traiga todos los mensajes de la base de datos
-    controller.getMessage()
+    controller.getMessage(filterMessage)
         .then((messageList) => {
             success(req, res, messageList, 200);
         })
