@@ -73,4 +73,16 @@ router.patch('/:id', function(req, res){
         })
 });
 
+// Creo el borrar usuario para un id de mansaje especifico
+router.delete('/:id', function(req, res){
+    // Solo borra el mensaje con id procorcionado por el query
+    controller.deleteMessage(req.params.id)
+        .then(() => {
+            success(req, res, `Mensaje ${req.params.id} eliminado`, 200);
+        })
+        .catch((err) => {
+            error(req, res, 'Error interno', 500, err);
+        })
+})
+
 export default router;

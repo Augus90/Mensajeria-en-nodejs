@@ -55,9 +55,17 @@ async function updateText(id, message){
     return newMessage;
 }
 
+
+function deleteMessage(id){
+    // Busco el id en la BDD para eliminarlo
+    return Model.deleteOne({ 
+        _id: id
+    });
+}
+
 export default {
     add: addMessage,
     list: getMessage,
     updateText: updateText,
-    //
+    remove : deleteMessage,
 }

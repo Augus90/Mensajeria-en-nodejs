@@ -48,8 +48,24 @@ function updateMessage(id, message) {
     });
 }
 
+function deleteMessage(id){
+    return new Promise((resolve, reject) => {
+        if(!id){ // verificamos que el id no sea nulo
+            reject('Invalid id');
+            return false;
+        }
+        // Si no es nulo lo busco en la base de datos y lo elimino
+        store.remove(id)
+            .then(() => {
+                resolve();
+            })
+            .catch(e => reject(e));
+    });
+}
+
 export default {
     addMessage,
     getMessage,
     updateMessage,
+    deleteMessage,
 }
