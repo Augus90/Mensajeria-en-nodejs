@@ -8,8 +8,6 @@ import db from "mongoose";
 import Model from "./model.mjs"
 import config from "../../Config/config.js";
 
-// mongodb+srv://db_user:Admin1234@cluster0.skmayhw.mongodb.net/test
-
 // Configuro las variables de entorno que vienen de config.js
 const USER = encodeURIComponent(config.config.db_user);
 const PASSWORD = encodeURIComponent(config.config.db_password);
