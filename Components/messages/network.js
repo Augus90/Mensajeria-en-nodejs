@@ -59,4 +59,16 @@ router.post('/', function(req, res){ // Solo POST
     // }
 });
 
+router.patch('/:id', function(req, res){
+    console.log(req.params.id);
+
+    controller.updateMessage(req.params.id, req.body.message)
+        .then((data) => {
+            success(req, res, data, 200);
+        })
+        .catch((err) => {
+            error(req, res, 'Error interno', 500, err);
+        })
+});
+
 export default router;

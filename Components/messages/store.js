@@ -8,7 +8,6 @@ import db from "mongoose";
 import Model from "./model.mjs"
 import config from "../../Config/config.js";
 
-// mongodb+srv://db_user:Admin1234@cluster0.skmayhw.mongodb.net/test
 
 // Configuro las variables de entorno que vienen de config.js
 const USER = encodeURIComponent(config.config.db_user);
@@ -38,8 +37,20 @@ const getMessage = async function(){
     return messages;
 }
 
+async function updateText(id, message){
+    // Busco el unico mensaje con ese id
+    const foundMessage = await Model.findOne({ 
+        _id: id
+    });  
+    // modifico su contenido con el mensaje nuevo
+    foundMessage.message = message;
+    const newMessage = await foundMessage.save();
+    return newMessage;
+}
+
 export default {
     add: addMessage,
     list: getMessage,
+    updateText: updateText,
     //
 }

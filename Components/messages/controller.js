@@ -35,7 +35,21 @@ function getMessage(user, message) {
     });
 };
 
+function updateMessage(id, message) {
+    return new Promise(async (resolve, reject) => {
+        if(!id || !message){ // verificamos que el id y el mensaje no estén vacios
+            reject('Invalid data');
+            return false;
+        }
+        // llama al store que se encargue de la actualización 
+        const result = await store.updateText(id, message);
+
+        resolve(result);
+    });
+}
+
 export default {
     addMessage,
-    getMessage
+    getMessage,
+    updateMessage,
 }
