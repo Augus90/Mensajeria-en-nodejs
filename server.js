@@ -1,7 +1,19 @@
 import express, { Router } from 'express'; // importo como en ES6
 
+// Importo la confihuracion de la base de datos
+import config from "./Config/config.js";
+import db from './db.js';
+
 // importo el componente network donde estan los modulos con las configuraciones de las rutas
 import router from './network/routes.js'
+
+
+// Creo la URI para la conexión de la base de datos
+const MONGO_URI = `mongodb+srv://${db.USER}:${db.PASSWORD}@${config.config.db_host}/${db.DB_NAME}?retryWrites=true&w=majority`;
+
+// Para no tener que conectarme a la BDD por cada una de las peticiones, me conecto desde el server y utilizar
+// la conexión para todas las consultar futuras
+db.connect(MONGO_URI);
 
 var app = express(); // inicializo express
 
