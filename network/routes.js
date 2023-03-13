@@ -1,5 +1,6 @@
 import express, { Router } from 'express'; // importo como en ES6
 import message from "../Components/messages/network.js"
+import user from "../Components/user/network.js"
  
 
 // Creamos la capa de red, donde utilizaremos a express para llamar a las rutas
@@ -8,6 +9,7 @@ import message from "../Components/messages/network.js"
 const router = function (server) {
     // Todas las llamadas hacia message las gestione el componente de message
     server.use('/message', message);
+    server.use('/user', user);
 }
 
 export default router;

@@ -46,3 +46,21 @@ content-type: application/json
 
 DELETE   http://localhost:3000/message/640d11a5386d2a57b0eb1957 HTTP/1.1
 content-type: application/json
+
+###
+
+GET  http://localhost:3000/user HTTP/1.1
+content-type: application/json
+
+###
+
+GET  http://localhost:3000/user?user=Carlos HTTP/1.1
+content-type: application/json
+
+###
+POST  http://localhost:3000/user HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Jesus"
+}
