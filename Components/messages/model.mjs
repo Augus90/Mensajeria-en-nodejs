@@ -3,7 +3,12 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const mySchema = new Schema({
-    user: String,
+    // user: String,
+    // Agrego un object Id de mongo para hacer referencia a la otra tabla con los usuarios
+    user: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    }],
     message: {
         type: String,
         required: true // el mensaje es requerido

@@ -25,8 +25,8 @@ router.get('/', function(req, res){ // Solo GET
         .then((messageList) => {
             success(req, res, messageList, 200);
         })
-        .catch((error) => {
-            error(req, res, 'Error inesperado', 500, error);
+        .catch((err) => {
+            error(req, res, 'Error inesperado', 500, err);
         });
 });
 

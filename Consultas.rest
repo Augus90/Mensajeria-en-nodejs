@@ -64,3 +64,12 @@ content-type: application/json
 {
   "name": "Jesus"
 }
+
+###
+POST  http://localhost:3000/message HTTP/1.1
+content-type: application/json
+
+{
+  "user": "640e2c69fbafa296ba8ca777",
+  "message": "Entidades De Jesus"
+}

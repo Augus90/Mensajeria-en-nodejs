@@ -7,5 +7,38 @@
         "latex",
         "plaintext",
         "javascript"
+    ],
+    "sqltools.connections": [
+        {
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 1433,
+            "askForPassword": false,
+            "driver": "MSSQL",
+            "name": "SqlServer",
+            "database": "Test",
+            "username": "Mono-Escritorio\\augus",
+            "connectString": "Server=localhost;Database=master;Trusted_Connection=True;"
+        },
+        {
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 1433,
+            "driver": "MSSQL",
+            "name": "SQL SERVER DOCKER",
+            "username": "sa",
+            "password": "Admin1234",
+            "database": "<Default>"
+        }
     ]
 }
