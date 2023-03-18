@@ -1,22 +1,30 @@
 import store from "./store.js";
 
-function addMessage(user, message) {
+function addMessage(chat ,user, message, file) {
     // Agrego el controlador para generar el mensaje que se envía al recibir una petición por PUT
     // Este recibe los mensajes que se le pasan por el cuerpo de la petición y lo muestra por pantalla
 
     // Lo resuelve con una promesa
     return new Promise((resolve, reject) => {
         // Si no se proporciona el mensaje o el usuario, lo rechaza e informa del error
-        if (!user || !message){
-            console.error('[messageController] No hay usuario o mensaje')
+        if (!chat || !user || !message){
+            console.error('[messageController] No hay chat, usuario o mensaje')
             reject('Los datos son incorrectos');
             return false;
         }
+
+        let fileUrl = '';
+        if(file){
+            fileUrl = 'http://localhost:3000/app/files/' + file.filename;
+        }
+
         // Si todo llega correctamente, creo el mensaje, agrego la fecha y lo devuelvo
         const fullMessage = {
+            chat: chat,
             user: user,
             message: message,
-                date: new Date(),
+            date: new Date(),
+            file: fileUrl,
             };
         
         // console.log(fullMessage);

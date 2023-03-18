@@ -1,10 +1,25 @@
 import express, {response, Router} from 'express';
 
+import multer from 'multer';
+
 import {success,error} from '../../network/response.mjs';// importo el modulo para las respestas homogeneas
 
 import controller from './controller.js';
 
 const router = Router(); // Agrego el router de express
+
+const storage = multer.diskStorage({
+    destination: function(req, file, next){
+        next(null, 'public/files/')
+    },
+    filename: function(req, file, next){
+        next(null, Date.now() + '.jpg');
+    }
+});
+
+const upload = multer({ 
+    storage: storage
+});
 
 // Configuro el router para que solamente responda a las peticiones GET
 router.get('/', function(req, res){ // Solo GET
@@ -37,19 +52,19 @@ router.put('/', function(req, res){ // Solo PUT
     res.send('Mensaje ' + req.body.text + ' añadido correctamente');
 });
 
-router.post('/', function(req, res){ // Solo POST
+router.post('/', upload.single('file'), function(req, res){ // Solo POST
     // console.log(req.body);
     // console.log(req.query); // nos permite acceder a los parametros por query
     // Lo que nos llegue del parametro 'text' que nos manda el body lo debuelve como respuesta
 
     // llamamos al controlador pora que se encargue de procesar la informacion del cuerpo del mensaje
     // y pueda guardar el mensaje en la base de datos
-    controller.addMessage(req.body.user, req.body.message)
+    controller.addMessage(req.body.chat, req.body.user, req.body.message, req.file)
         .then((fullMessage) => {
             success(req, res, fullMessage,201); // si lo resuelve, reenvía el mensaje y un codigo de respuesta valido
         })
         .catch((err) => {
-            error(req, res, 'Información invalida', 400, 'No se pudo cargar el message');
+            error(req, res, 'Información invalida', 400, err);
         });
     // res.status(201).send({'Error' : 'Creado con exito'}); // Envia el estado 201 en la respuesta 
     // if(req.query.error == 'ok'){

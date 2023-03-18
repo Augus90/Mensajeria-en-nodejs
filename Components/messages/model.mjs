@@ -4,16 +4,21 @@ const Schema = mongoose.Schema;
 
 const mySchema = new Schema({
     // user: String,
+    chat: {
+        type: Schema.Types.ObjectId,
+        ref: 'Chat',
+    },
     // Agrego un object Id de mongo para hacer referencia a la otra tabla con los usuarios
-    user: [{
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-    }],
+    },
     message: {
         type: String,
         required: true // el mensaje es requerido
     },
-    date: Date
+    date: Date,
+    file: String,
 })
 
 // Creo el modelo message desde mi schema de mensajes y lo exporto

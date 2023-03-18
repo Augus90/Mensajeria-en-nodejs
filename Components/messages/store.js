@@ -26,6 +26,7 @@ const getMessage = async function(filterUser){
         }
     
         // Llamo al find para que me traiga todos los mensajes de mi BDD con el filtro proporcionado
+        // Luego busco el usuario por su ID con Populate buscando en user
         const messages = Model.find(filter)
             .populate('user')
             .catch((err) => reject(err));

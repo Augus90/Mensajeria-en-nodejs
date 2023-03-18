@@ -62,7 +62,7 @@ POST  http://localhost:3000/user HTTP/1.1
 content-type: application/json
 
 {
-  "name": "Jesus"
+  "name": "Remo"
 }
 
 ###
@@ -70,6 +70,31 @@ POST  http://localhost:3000/message HTTP/1.1
 content-type: application/json
 
 {
-  "user": "640e2c69fbafa296ba8ca777",
-  "message": "Entidades De Jesus"
+  "user": "64161f8be78cb21d665e45a6",
+  "message": "Buen dia"
+}
+
+###
+POST  http://localhost:3000/chat HTTP/1.1
+content-type: application/json
+
+{
+  "users":[
+      "64161f66e78cb21d665e45a2",
+      "64161f8be78cb21d665e45a6"
+      ]
+}
+###
+
+GET  http://localhost:3000/chat/640e2c69fbafa296ba8ca777 HTTP/1.1
+content-type: application/json
+
+###
+POST  http://localhost:3000/message HTTP/1.1
+content-type: application/json
+
+{
+  "chat": "6416230069c58f84526def76",
+  "user": "64161f8be78cb21d665e45a6",
+  "message": "Hola hermano"
 }
