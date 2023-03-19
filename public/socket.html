@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <script src="/socket.io/socket.io.js"></script>
+    </head>
+    <body>
+        <h1>
+            Mira la Consola
+        </h1>
+        <br>
+        <br>
+        <div class="">
+            <h2>Mensaje:</h2>
+            <p id="message"></p>
+        </div>
+        <script>
+            var socket = io.connect('http://localhost:3000', {
+                forceNew : true,
+            });
+
+            var p = document.getElementById('message');
+            socket.on('message', function(data) {
+                console.log(data);
+                p.innerText = data.message;
+            })
+        </script>
+    </body>
+</html>

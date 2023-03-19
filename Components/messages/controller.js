@@ -1,3 +1,4 @@
+import socket from "../../socket.js";
 import store from "./store.js";
 
 function addMessage(chat ,user, message, file) {
@@ -30,6 +31,9 @@ function addMessage(chat ,user, message, file) {
         // console.log(fullMessage);
         // LLamo a la funcion guardar mensaje en la base de datos
         store.add(fullMessage);
+
+        // Emite el menaje por WebSocket para que todos lo que estén escuchando reciban el mensaje
+        socket.socket.io.emit('message', fullMessage);
 
         resolve(fullMessage); // Si todo salió bien lo devuelvo
     });

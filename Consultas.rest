@@ -96,5 +96,5 @@ content-type: application/json
 {
   "chat": "6416230069c58f84526def76",
   "user": "64161f8be78cb21d665e45a6",
-  "message": "Hola hermano"
+  "message": "Hello, world"
 }
