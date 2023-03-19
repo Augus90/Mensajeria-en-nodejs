@@ -5,7 +5,7 @@ const app = express(); // inicializo express
 import http from 'http';
 const HttpServer =  http.Server(app)
 
-
+import cors from 'cors';
 // Importo la confihuracion de la base de datos
 import config from "./Config/config.js";
 import db from './db.js';
@@ -22,6 +22,7 @@ const MONGO_URI = `mongodb+srv://${db.USER}:${db.PASSWORD}@${config.config.db_ho
 // la conexión para todas las consultar futuras
 db.connect(MONGO_URI);
 
+app.use(cors());
 app.use(express.json()); // Uso el body parser para poder escuchal consultas del body por json
 app.use(express.urlencoded({extended: false})); // Uso el urlencoded para poder escuchar el body por Form-Encoded
 // app.use(router); // Uso es router de express

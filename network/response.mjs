@@ -1,11 +1,23 @@
-// Creo las 2 funciones de respuesta para unificar la salida de mi sistema
+const statusMessage = {
+    '200': 'Done',
+    '201': 'Created',
+    '400': 'Invalid format',
+    '500': 'Internal error'
+};
 
+// Creo las 2 funciones de respuesta para unificar la salida de mi sistema
 export const success = function(req, res, message, status){
+
+    let statusCode = status;
+    let statusMessage = message;
+
+    if (!status) statusCode = 200;
+    if (!message) statusMessage = statusMessage[status];
     // responde con un objeto de error vacio y un mensaje, y si no le especifico el estado
     // le envia un 200 por defecto
-    res.status(status || 200).send({
+    res.status(statusCode).send({
         Error: '',
-        body: message
+        body: statusMessage 
     });
 }
 
